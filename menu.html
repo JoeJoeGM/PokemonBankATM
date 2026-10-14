@@ -1,95 +1,269 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Menú principal | Pokémon Bank</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Menú principal | Pokémon Bank</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<nav class="navbar navbar-expand-md navbar-pk px-4">
-  <a class="navbar-brand d-flex align-items-center" href="menu.html">
-    <svg class="pokeball" viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="13" fill="#fff"/><path d="M2 15a13 13 0 0 1 26 0z" fill="#E8732A"/><path d="M2 15h26" stroke="#14213D" stroke-width="3"/><circle cx="15" cy="15" r="4.5" fill="#fff" stroke="#14213D" stroke-width="2.5"/></svg>
-    Pokémon <span class="ml-1">Bank</span>
-  </a>
-  <button class="navbar-toggler border-light" type="button" data-toggle="collapse" data-target="#menuNav" aria-controls="menuNav" aria-expanded="false" aria-label="Abrir menú"><span class="navbar-toggler-icon" style="filter:invert(1)"></span></button>
-  <div class="collapse navbar-collapse justify-content-end" id="menuNav">
-    <ul class="navbar-nav">
-      <li class="nav-item"><a class="nav-link active" href="menu.html">Menú</a></li>
-      <li class="nav-item"><a class="nav-link salir" href="index.html">Salir</a></li>
-    </ul>
-  </div>
-</nav>
-<main class="container py-4">
-  <section class="card card-pk p-4 mb-4">
-   <!-- Asumiendo que ya tienes tu barra de navegación (Navbar) arriba -->
 
-<div class="container mt-5">
-    <!-- Tarjeta de Bienvenida (Usuario y Cuenta) -->
-    <div class="card shadow-sm p-4 mb-5" style="border-radius: 15px; border-left: 5px solid #FFCB05;">
-        <div class="d-flex justify-content-between align-items-center">
+<nav class="navbar navbar-expand-md navbar-pk px-4">
+    <a class="navbar-brand d-flex align-items-center" href="menu.html">
+        <svg class="pokeball" viewBox="0 0 30 30" aria-hidden="true">
+            <circle cx="15" cy="15" r="13" fill="#fff"/>
+            <path d="M2 15a13 13 0 0 1 26 0z" fill="#E8732A"/>
+            <path d="M2 15h26" stroke="#14213D" stroke-width="3"/>
+            <circle cx="15" cy="15" r="4.5" fill="#fff" stroke="#14213D" stroke-width="2.5"/>
+        </svg>
+        Pokémon <span class="ml-1">Bank</span>
+    </a>
+
+    <button class="navbar-toggler border-light" type="button"
+        data-toggle="collapse" data-target="#menuNav"
+        aria-controls="menuNav" aria-expanded="false" aria-label="Abrir menú">
+        <span class="navbar-toggler-icon" style="filter:invert(1)"></span>
+    </button>
+
+    <div class="collapse navbar-collapse justify-content-end" id="menuNav">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link active" href="menu.html">Menú</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link salir" href="index.html">Salir</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<main class="container py-4">
+
+    <section class="card card-pk p-4 mb-4">
+        <div class="d-flex flex-wrap justify-content-between align-items-center">
             <div>
                 <small class="text-muted">Bienvenido</small>
-                <!-- Ojo: puedes poner tu nombre de prueba aquí -->
-                <h3 class="mb-0 font-weight-bold" style="color: #14213D;">Adrian Castillo</h3> 
+                <h3 class="mb-0 font-weight-bold">Adrian Castillo</h3>
             </div>
-            <div class="text-right">
+
+            <div class="text-md-right mt-3 mt-md-0">
                 <small class="text-muted">Número de cuenta</small>
                 <p class="mb-0 font-weight-bold">0001-2345-6789</p>
             </div>
         </div>
+
+        <hr>
+
+        <small class="text-muted">Saldo disponible</small>
+        <h2 class="font-weight-bold mb-0" id="saldo">$1,000.00</h2>
+    </section>
+
+    <h4 class="font-weight-bold mb-3">¿Qué deseas hacer?</h4>
+
+    <div class="row mb-4">
+        <div class="col-md-4 mb-3">
+            <button type="button" class="tile" id="btnDepositar">
+                <span class="ic">+</span>
+                <span>Depositar dinero</span>
+            </button>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <button type="button" class="tile" id="btnRetirar">
+                <span class="ic">−</span>
+                <span>Retirar dinero</span>
+            </button>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <button type="button" class="tile" id="btnConsultar">
+                <span class="ic">$</span>
+                <span>Consultar saldo</span>
+            </button>
+        </div>
     </div>
 
-    <!-- Sección de Acciones Principales (Cajitas Horizontales) -->
-    <h4 class="mb-3 font-weight-bold" style="color: #14213D;">¿Qué deseas hacer?</h4>
-    
-    <div class="row mb-5">
-        <!-- Opción 1: Depositar -->
-        <div class="col-md-4 mb-3">
-            <button class="btn btn-outline-primary w-100 d-flex align-items-center p-3 shadow-sm" style="border-radius: 12px;">
-                <span class="bg-primary text-white rounded-circle d-flex justify-content-center align-items-center mr-3" style="width: 40px; height: 40px; font-size: 1.5rem;">+</span>
-                <span class="font-weight-bold" style="font-size: 1.1rem;">Depositar</span>
-            </button>
-        </div>
+    <h4 class="font-weight-bold mb-3">Pagar servicios</h4>
 
-        <!-- Opción 2: Retirar -->
-        <div class="col-md-4 mb-3">
-            <button class="btn btn-outline-primary w-100 d-flex align-items-center p-3 shadow-sm" style="border-radius: 12px;">
-                <span class="bg-primary text-white rounded-circle d-flex justify-content-center align-items-center mr-3" style="width: 40px; height: 40px; font-size: 1.5rem;">-</span>
-                <span class="font-weight-bold" style="font-size: 1.1rem;">Retirar</span>
-            </button>
-        </div>
+    <section class="card card-pk p-4 mb-4">
+        <p class="font-weight-bold">Selecciona el servicio que deseas pagar:</p>
 
-        <!-- Opción 3: Consultar Saldo -->
-        <div class="col-md-4 mb-3">
-            <button class="btn btn-outline-primary w-100 d-flex align-items-center p-3 shadow-sm" style="border-radius: 12px;">
-                <span class="bg-primary text-white rounded-circle d-flex justify-content-center align-items-center mr-3" style="width: 40px; height: 40px; font-size: 1.2rem;">$</span>
-                <span class="font-weight-bold" style="font-size: 1.1rem;">Consultar saldo</span>
-            </button>
-        </div>
-    </div>
-
-    
-    <h4 class="mb-3 font-weight-bold" style="color: #14213D;">Pagar servicios</h4>
-    <div class="card p-4 shadow-sm" style="border-radius: 15px; background-color: #ffff;">
-        <p class="text-dark mb-3 font-weight-bold">Selecciona el servicio que deseas cancelar:</p>
-   
         <div class="d-flex flex-wrap">
-            <button class="btn btn-outline-warning text-dark font-weight-bold mr-3 mb-2 px-4" style="border-radius: 30px;">Energía eléctrica</button>
-            <button class="btn btn-outline-warning text-dark font-weight-bold mr-3 mb-2 px-4" style="border-radius: 30px;">Internet</button>
-            <button class="btn btn-outline-warning text-dark font-weight-bold mr-3 mb-2 px-4" style="border-radius: 30px;">Telefonía</button>
-            <button class="btn btn-outline-warning text-dark font-weight-bold mb-2 px-4" style="border-radius: 30px;">Agua potable</button>
+            <button type="button" class="chip mr-2 mb-2 servicio" data-servicio="Energía eléctrica">
+                Energía eléctrica
+            </button>
+
+            <button type="button" class="chip mr-2 mb-2 servicio" data-servicio="Internet">
+                Internet
+            </button>
+
+            <button type="button" class="chip mr-2 mb-2 servicio" data-servicio="Telefonía">
+                Telefonía
+            </button>
+
+            <button type="button" class="chip mr-2 mb-2 servicio" data-servicio="Agua potable">
+                Agua potable
+            </button>
         </div>
+    </section>
+
+    <div id="mensaje" class="alert d-none" role="status" aria-live="polite"></div>
+
+    <div class="mb-3">
+        <a href="historial.html" class="btn btn-pk mr-2 mb-2 px-4">
+            Ver historial
+        </a>
+
+        <a href="graficas.html" class="btn btn-borde mr-2 mb-2 px-4">
+            Ver gráficas
+        </a>
+
+        <a href="index.html" class="btn btn-primary mb-2 px-4"
+           style="background:#24408E;border-radius:12px;min-height:52px">
+            Salir
+        </a>
     </div>
-</div>
-  </section>
-  <a href="historial.html" class="btn btn-pk mr-2 mb-2 d-inline-flex align-items-center px-4">Ver historial</a>
-  <a href="graficas.html" class="btn btn-borde mr-2 mb-2 d-inline-flex align-items-center px-4">Ver gráficas</a>
-  <a href="index.html" class="btn btn-primary mb-2 d-inline-flex align-items-center px-4" style="background:#24408E;border-radius:12px;min-height:52px">Salir</a>
+
 </main>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const saldoElemento = document.getElementById("saldo");
+
+    let saldoGuardado = localStorage.getItem("pokemonBankSaldo");
+    let saldo = saldoGuardado !== null ? Number(saldoGuardado) : 1000;
+
+    let historial;
+
+    try {
+        historial = JSON.parse(
+            localStorage.getItem("pokemonBankHistorial") || "[]"
+        );
+
+        if (!Array.isArray(historial)) historial = [];
+    } catch (error) {
+        historial = [];
+    }
+
+    function actualizarSaldo() {
+        saldoElemento.textContent = saldo.toLocaleString("en-US", {
+            style: "currency",
+            currency: "USD"
+        });
+
+        localStorage.setItem("pokemonBankSaldo", saldo.toFixed(2));
+    }
+
+    function registrar(tipo, detalle, monto) {
+        historial.unshift({
+            fecha: new Date().toLocaleDateString("es-SV"),
+            tipo: tipo,
+            detalle: detalle,
+            monto: monto
+        });
+
+        localStorage.setItem(
+            "pokemonBankHistorial",
+            JSON.stringify(historial)
+        );
+    }
+
+    function pedirMonto(titulo) {
+        const entrada = prompt(
+            titulo + "\nIngresa el monto en dólares:"
+        );
+
+        if (entrada === null) return null;
+
+        const texto = entrada.trim();
+
+        if (!/^\d+(\.\d{1,2})?$/.test(texto)) {
+            alert("Ingresa un monto válido. Ejemplo: 25.50");
+            return null;
+        }
+
+        const monto = Number(texto);
+
+        if (!Number.isFinite(monto) || monto <= 0) {
+            alert("El monto debe ser mayor que cero.");
+            return null;
+        }
+
+        return Math.round(monto * 100) / 100;
+    }
+
+    function depositar() {
+        const monto = pedirMonto("Depósito");
+
+        if (monto === null) return;
+
+        saldo = Math.round((saldo + monto) * 100) / 100;
+
+        registrar("Depósito", "Depósito en cuenta", monto);
+        actualizarSaldo();
+
+        alert("Depósito realizado correctamente.");
+    }
+
+    function retirar() {
+        const monto = pedirMonto("Retiro");
+
+        if (monto === null) return;
+
+        if (monto > saldo) {
+            alert("Fondos insuficientes.");
+            return;
+        }
+
+        saldo = Math.round((saldo - monto) * 100) / 100;
+
+        registrar("Retiro", "Retiro de efectivo", monto);
+        actualizarSaldo();
+
+        alert("Retiro realizado correctamente.");
+    }
+
+    function pagarServicio(servicio) {
+        const monto = pedirMonto("Pago de " + servicio);
+
+        if (monto === null) return;
+
+        if (monto > saldo) {
+            alert("Fondos insuficientes.");
+            return;
+        }
+
+        saldo = Math.round((saldo - monto) * 100) / 100;
+
+        registrar("Servicios", servicio, monto);
+        actualizarSaldo();
+
+        alert("Pago de " + servicio + " realizado correctamente.");
+    }
+
+    document.getElementById("btnDepositar")
+        .addEventListener("click", depositar);
+
+    document.getElementById("btnRetirar")
+        .addEventListener("click", retirar);
+        
+
+    document.getElementById("btnConsultar")
+        .addEventListener("click", function () {
+            alert("Saldo disponible: $" + saldo.toFixed(2));
+        });
+
+    document.querySelectorAll(".servicio").forEach(function (boton) {
+        boton.addEventListener("click", function () {
+            pagarServicio(this.dataset.servicio);
+        });
+    });
+
+    actualizarSaldo();
+});
+</script>
 </body>
 </html>
