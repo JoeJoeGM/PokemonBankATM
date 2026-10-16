@@ -8,6 +8,7 @@
         <!--Librerias-->
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/validate.js/0.13.1/validate.min.js"></script>
 
@@ -26,10 +27,23 @@
                 </button>
             </div>
             </section>
+
+            <section class="tarjeta">
+            <h2>jsPDF</h2>
+                <button onclick="generarPDF()" class="boton boton-rojo">
+                    Ejemplo 1
+                </button>
+                <button onclick="generarPDFTabla()" class="boton boton-ambar">
+                    Ejemplo 2
+                </button>
+        </section>
+
         </div>
+        
 
 
         <script src="ejemplolibrerias/js/swetalert.js"></script>
+        <script src="ejemplolibrerias/js/jsPDF.js"></script>
     </body>
 
 
