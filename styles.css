@@ -151,7 +151,8 @@ body{
   border-radius:8px
 }
 
-/* ===== LOGIN: tarjeta, casillas y teclado ===== */
+/*  Login: tarjeta, casillas y teclado  */
+
 .card-pk h2{font-size:2rem}
 .card-pk p{font-size:1.1rem}
 
@@ -210,7 +211,7 @@ body{
   font-size:1.2rem
 }
 
-/* ===== Ajustes para escritorio ===== */
+/*  Ajustes para escritorio  */
 @media (min-width: 992px) and (min-height: 600px) {
   html,
   body {
@@ -294,7 +295,7 @@ body{
   }
 }
 
-/* ===== Ajustes para teléfonos ===== */
+/*  Ajustes para telefonos  */
 @media (max-width: 576px) {
   .login-izq {
     padding: 2rem !important;
