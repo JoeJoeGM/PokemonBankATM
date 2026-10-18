@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <title>Inicio</title>
+        <style>
+            * {
+                    margin: 0; /*Quita margenes predeterminados*/
+                    padding: 0; /*Quita relleno predeterminado*/
+                    box-sizing: border-box; /*El ancho incluye el borde y el relleno*/
+                }
+
+                body {
+                    font-family: Arial, sans-serif;
+                    background-color: #54859d;
+                    color: #f3eded;
+                    line-height: 1.5; /*Espaciado entre lineas */
+                    padding: 20px; /*Relleno alrededor de la página */
+                }
+                /*Titulo principal */
+                .contenedor-tarjetas{
+                    display: flex;
+                    gap: 10px;
+                    justify-content: center;
+                    align-items: center;
+                }
+                .tarjeta:hover{
+                    transform: scale(1.1);
+                }
+                .contenedor-principal h1 {
+                    text-align: center;
+                    margin-bottom: 30px; /*Espacio debajo del titulo*/
+                    font-size: 24px;
+                }
+                .contenedor-principal p {
+                    text-align: center;
+                    margin-bottom: 30px; /*Espacio debajo del titulo*/
+                    font-size: 20px;
+
+                }
+
+                .tarjeta {
+                    background: #ffffff;
+                    border: 1px solid #dddddd;
+                    border-radius: 8px; /*Bordes redondeados*/
+                    width: 100%;
+                    max-width: 800px;
+                    margin: 10px;
+                    overflow: hidden;
+                    cursor: pointer;
+                }
+                .tarjeta img {
+                    width: 100%;
+                    height: auto;
+                    display: block;
+
+                }
+
+                /*Titulos dentro de cada tarjeta*/
+                .tarjeta h2 {
+                    margin-bottom: 15px; /*Espacio debajo del titulo */
+                    font-size: 20px;
+                    color: #444444;
+                }
+                .enlace {
+                    text-decoration: none;
+                    color: inherit;
+                    display: block;
+                }
+
+
+        </style>
+    </head>
+
+    <body>
+        <header>
+            <span class="brand">Pagina Principal</span>
+        </header>
+
+        <main class="contenedor-principal">
+            <h1>Selecciona una de las opciones</h1>
+            <p class="subtitulo">Elige el destino al que deseas ingresar</p>  
+            <div class="contenedor-tarjetas">         
+                <section class="tarjeta">
+                    <a href="demosLibrerias-Index.html" class="enlace">
+                    <img src="img/pokebank.jpg" >
+                    <h2>Ingresar al ATM</h2>\
+                    </a>
+                </section>
+                <section class="tarjeta">
+                    <a href="demosLibrerias-Index.html" class="enlace">
+                    <img src="img/testLIb.jpg" >
+                    <h2>Ingresar a las pruebas de librerias</h2>\
+                    </a>
+                </section>
+            </div>         
+            
+        </main>
+
+
+    </body>
+
+
+</html>
