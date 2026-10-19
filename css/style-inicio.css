@@ -1,0 +1,103 @@
+* {
+    margin: 0; /*Quita margenes predeterminados*/
+    padding: 0; /*Quita relleno predeterminado*/
+    box-sizing: border-box; /*El ancho incluye el borde y el relleno*/
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #54859d;
+    color: #f3eded;
+    line-height: 1.5; /*Espaciado entre lineas */
+    padding: 20px; /*Relleno alrededor de la página */
+    
+}
+
+/*Titulo principal */
+.contenedor-tarjetas{
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+.tarjeta:hover{
+    transform: scale(1.1);
+    box-shadow: 0 4px 15px rgba(206, 9, 9, 0.529);
+}
+.contenedor-principal h1 {
+    text-align: center;
+    margin-bottom: 30px; /*Espacio debajo del titulo*/
+    font-size: 24px;
+}
+.contenedor-principal p {
+    text-align: center;
+    margin-bottom: 30px; /*Espacio debajo del titulo*/
+    font-size: 20px;
+
+}
+
+.tarjeta {
+    background: #ffffff;
+    border: 1px solid #dddddd;
+    border-radius: 8px; /*Bordes redondeados*/
+    width: 100%;
+    max-width: 600px;
+    margin: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(248, 246, 246, 0.281);
+}
+.tarjeta img {
+    width: 100%;
+    height: auto;
+    display: block;
+
+}
+
+/*Titulos dentro de cada tarjeta*/
+.tarjeta h2 {
+    margin-bottom: 15px; /*Espacio debajo del titulo */
+    font-size: 20px;
+    color: #4444446a;
+}
+.enlace {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+.descargaDoc {
+    margin: 0 auto;
+    max-width: 600px;
+}
+
+/*Integrantes*/
+.marquesina-integrantes {
+    background-color: #83adb799;
+    padding: 15px 0;
+    font-size: 1.2rem;
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    border-radius: 8px;
+    border-color: #dddddd;                
+    max-width: 80%;
+    margin: 40px auto;
+
+}
+
+
+.integrante-rojo {
+    vertical-align: middle;
+    color: #e34e21;
+}
+.integrante-blanco {
+    vertical-align: middle;
+    color: #f6f3f3;
+}
+.pokeball {
+    
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    vertical-align: middle;
+    margin: 0 10px;
+}
