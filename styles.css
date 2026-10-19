@@ -1,0 +1,348 @@
+:root{
+  --azul:#24408E;
+  --amarillo:#FFCB05;
+  --naranja:#E8732A;
+  --tinta:#14213D;
+  --fondo:#F3F5FB
+}
+
+body{
+  font-family:'Nunito',Arial,sans-serif;
+  background:var(--fondo);
+  color:var(--tinta)
+}
+
+.navbar-pk{background:var(--azul)}
+
+.navbar-pk .navbar-brand{color:#fff;
+  font-weight:800;
+  font-size:1.4rem
+}
+
+.navbar-pk .navbar-brand span{color:var(--amarillo)}
+
+.navbar-pk .nav-link{color:#fff;
+  font-weight:700;
+  border-radius:999px;
+  padding:.6rem 1.1rem
+}
+
+.navbar-pk .nav-link.active{background:var(--amarillo);
+  color:var(--tinta)
+}
+
+.navbar-pk .nav-link.salir{border:2px solid #fff}
+.pokeball{
+  width:30px;
+  height:30px;
+  margin-right:8px
+}
+
+.card-pk{
+  background:#fff;border:0;
+  border-radius:16px;
+  box-shadow:0 2px 8px rgba(20,33,61,.12)
+}
+
+.btn-pk{
+  background:var(--amarillo);
+  color:var(--tinta);
+  font-weight:800;
+  border-radius:12px;
+  min-height:52px
+}
+
+.btn-pk:hover{
+  background:#e6b800;
+  color:var(--tinta)
+}
+
+.btn-borde{
+  background:#fff;
+  border:2px solid var(--azul);
+  color:var(--tinta);
+  font-weight:800;
+  border-radius:12px;
+  min-height:52px
+}
+
+.tile{
+  background:#fff;
+  border:2px solid var(--azul);
+  border-radius:16px;
+  min-height:120px;
+  width:100%;
+  text-align:left;
+  font-weight:800;
+  font-size:1.15rem;
+  color:var(--tinta);
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  padding:16px
+}
+
+.tile:hover{background:#eef2ff}
+
+.ic{
+  width:44px;
+  height:44px;
+  border-radius:50%;
+  background:var(--azul);
+  color:#fff;display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:1.5rem
+}
+
+.chip{
+  background:#fff;
+  border:2px solid var(--naranja);
+  border-radius:999px;
+  min-height:44px;
+  padding:0 18px;
+  font-weight:700;
+  color:var(--tinta)
+}
+
+.login-izq{
+  background:var(--azul);
+  color:#fff
+}
+
+.table-pk thead th{
+  background:var(--azul);
+  color:#fff;border:0
+}
+
+.tag{
+  display:inline-block;
+  padding:4px 12px;
+  border-radius:999px;
+  font-weight:700;
+  font-size:.85rem
+}
+
+.t-dep{
+  background:#DDE6FB;
+  color:#1B2F6E
+}
+.t-ret{
+  background:#FFE0CC;
+  color:#7A3410
+}
+.t-srv{
+  background:#FFF1B3;
+  color:#5A4500 
+}
+
+.pos{
+  color:#1B6B38;
+  font-weight:800}.neg{color:#A8261D;
+    font-weight:800
+}
+
+.barra{
+  background:#E6EAF5;
+  border-radius:8px
+}
+
+.barra div{height:28px;
+  border-radius:8px
+}
+
+/*  Login: tarjeta, casillas y teclado  */
+
+.card-pk h2{font-size:2rem}
+.card-pk p{font-size:1.1rem}
+
+.pin{
+  width:76px;
+  height:86px;
+  border:2px solid var(--azul);
+  border-radius:12px;
+  text-align:center;
+  font-size:2.2rem;
+  padding:0;
+}
+
+/* El teclado toma exactamente el ancho de las 4 casillas */
+.pin-wrap{
+  width:max-content;
+  margin:0 auto;
+}
+.keypad{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+  width:0;          /* no influye en el ancho: lo define la fila de casillas */
+  min-width:100%;   /* y se estira a ese ancho */
+}
+.key{
+  width:100%;
+  min-width:0;
+  padding:16px 0;
+  font-size:1.4rem;
+  font-weight:700;
+  border:1px solid #14213D;
+  border-radius:8px;
+  background:#fff;
+  color:#14213D;
+  cursor:pointer;
+}
+.key:hover{background:#f1f3f9}
+.key:active{transform:scale(.96)}
+
+.key-borrar{
+  background:#dc3545;
+  border-color:#dc3545;
+  color:#fff;font-size:1rem
+}
+
+.key-limpiar{
+  background:#FFCB05;
+  border-color:#FFCB05;
+  color:#14213D;
+  font-size:1rem
+}
+
+#btnIngresar{
+  padding:14px;
+  font-size:1.2rem
+}
+
+/*  Ajustes para escritorio  */
+@media (min-width: 992px) and (min-height: 600px) {
+  html,
+  body {
+    height: 100%;
+  }
+
+  body {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .navbar-pk {
+    flex: 0 0 auto;
+  }
+
+  main.container {
+    flex: 1 1 auto;
+    min-height: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+  }
+
+  .container-fluid {
+    flex: 1 1 auto;
+    min-height: 0;
+  }
+
+  .row.min-vh-100 {
+    min-height: 0;
+    height: 100%;
+  }
+
+  .tiles {
+    flex: 1 1 auto;
+    min-height: 0;
+  }
+
+  .tiles > div {
+    display: flex;
+  }
+
+  .tile {
+    height: 100%;
+  }
+
+  .scroll-card {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow: auto;
+  }
+
+  .scroll-card .table-responsive {
+    overflow: visible;
+  }
+
+  .table-pk thead th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+
+  .graf-row {
+    flex: 1 1 auto;
+    min-height: 0;
+  }
+
+  .graf-row > section {
+    height: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .donut {
+    flex: 1 1 0;
+    min-height: 120px;
+    max-height: 300px;
+    width: 100%;
+  }
+}
+
+/*  Ajustes para telefonos  */
+@media (max-width: 576px) {
+  .login-izq {
+    padding: 2rem !important;
+  }
+
+  .login-izq h1 {
+    font-size: 1.8rem;
+  }
+
+  .login-izq p {
+    font-size: 1rem;
+  }
+
+  .pin {
+    width: 60px;
+    height: 70px;
+    font-size: 1.8rem;
+  }
+
+  /* Historial */
+  .table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .table-pk {
+    width: 100%;
+    min-width: 520px;
+    font-size: 0.8rem;
+  }
+
+  .table-pk th,
+  .table-pk td {
+    padding: 0.5rem 0.35rem;
+    vertical-align: middle;
+  }
+
+  .table-pk .tag {
+    padding: 3px 5px;
+    font-size: 0.7rem;
+  }
+  .filtro.activo {
+  background: var(--amarillo);
+  border-color: var(--naranja);
+  }
+
+  .filtro {
+  cursor: pointer;
+  }
+}
