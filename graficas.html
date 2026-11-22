@@ -7,14 +7,15 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="css/graficas.css">
 </head>
-<body>
-<nav class="navbar navbar-expand-md navbar-pk px-4">
+<body class="pagina-graficas">
+<nav class="navbar navbar-dark navbar-expand-md navbar-pk px-4">
   <a class="navbar-brand d-flex align-items-center" href="menu.html">
     <svg class="pokeball" viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="13" fill="#fff"/><path d="M2 15a13 13 0 0 1 26 0z" fill="#E8732A"/><path d="M2 15h26" stroke="#14213D" stroke-width="3"/><circle cx="15" cy="15" r="4.5" fill="#fff" stroke="#14213D" stroke-width="2.5"/></svg>
     Pokémon <span class="ml-1">Bank</span>
   </a>
-  <button class="navbar-toggler border-light" type="button" data-toggle="collapse" data-target="#menuNav" aria-controls="menuNav" aria-expanded="false" aria-label="Abrir menú"><span class="navbar-toggler-icon" style="filter:invert(1)"></span></button>
+  <button class="navbar-toggler border-light" type="button" data-toggle="collapse" data-target="#menuNav" aria-controls="menuNav" aria-expanded="false" aria-label="Abrir menú"><span class="navbar-toggler-icon"></span></button>
   <div class="collapse navbar-collapse justify-content-end" id="menuNav">
     <ul class="navbar-nav">
       <li class="nav-item"><a class="nav-link " href="menu.html">Menú</a></li>
@@ -25,31 +26,36 @@
 </nav>
 <main class="container py-4">
   <h1 class="font-weight-bold mb-3">Análisis de transacciones</h1>
-  <div class="row graf-row">
-    <section class="col-lg-6 mb-4">
-      <div class="card card-pk p-4 h-100 align-items-center">
-        <h2 class="h5 font-weight-bold align-self-start">Distribución por tipo</h2>
-        <svg class="donut" viewBox="0 0 180 180" role="img" aria-label="Gráfica de dona: 25% depósitos, 25% retiros, 50% servicios"><g transform="rotate(-90 90 90)" fill="none" stroke-width="36"><circle cx="90" cy="90" r="70" stroke="#24408E" stroke-dasharray="110 330"/><circle cx="90" cy="90" r="70" stroke="#E8732A" stroke-dasharray="110 330" stroke-dashoffset="-110"/><circle cx="90" cy="90" r="70" stroke="#FFCB05" stroke-dasharray="220 220" stroke-dashoffset="-220"/></g></svg>
-        <ul class="list-unstyled mt-3 w-100">
-          <li class="mb-2"><span class="tag" style="background:#24408E;color:#fff">Depósitos</span> 2 · 25%</li>
-          <li class="mb-2"><span class="tag" style="background:#E8732A;color:#14213D">Retiros</span> 2 · 25%</li>
-          <li><span class="tag" style="background:#FFCB05;color:#14213D">Servicios</span> 4 · 50%</li>
-        </ul>
-      </div>
-    </section>
-    <section class="col-lg-6 mb-4">
-      <div class="card card-pk p-4 h-100">
-        <h2 class="h5 font-weight-bold">Monto total por tipo</h2>
-        <p class="mb-1 mt-2">Depositos · $700.00</p><div class="barra mb-3"><div style="width:100%;background:#24408E"></div></div>
-        <p class="mb-1">Retiros · $160.00</p><div class="barra mb-3"><div style="width:23%;background:#E8732A"></div></div>
-        <p class="mb-1">Servicios · $95.89</p><div class="barra"><div style="width:14%;background:#FFCB05"></div></div>
-      </div>
-    </section>
+  <p class="text-muted">Consulta cuántas operaciones has realizado de cada tipo.</p>
+  <div id="estadoGrafica" class="alert alert-info" role="status" aria-live="polite">Cargando transacciones…</div>
+  <div id="errorGrafica" class="alert alert-warning" role="status" hidden></div>
+  <noscript><p class="alert alert-warning">Activa JavaScript para consultar tus estadísticas.</p></noscript>
+  <section class="card card-pk p-3 p-md-4 mb-4" aria-labelledby="tituloGrafica">
+    <h2 id="tituloGrafica" class="h5 font-weight-bold">Cantidad de transacciones por tipo</h2>
+    <div class="grafica-contenedor">
+      <canvas id="graficaTransacciones" role="img" aria-label="Cantidad de depósitos, retiros y pagos de servicios" aria-describedby="resumenTransacciones"></canvas>
+    </div>
+    <div class="table-responsive mt-3">
+      <table id="resumenTransacciones" class="table table-pk mb-0">
+        <caption class="sr-only">Los mismos datos de la gráfica, disponibles en una tabla.</caption>
+        <thead><tr><th scope="col">Tipo de transacción</th><th scope="col" class="text-right">Cantidad</th></tr></thead>
+        <tbody>
+          <tr><th scope="row"><span class="tag t-dep">Depósitos</span></th><td id="cantidadDepositos" class="text-right">0</td></tr>
+          <tr><th scope="row"><span class="tag t-ret">Retiros</span></th><td id="cantidadRetiros" class="text-right">0</td></tr>
+          <tr><th scope="row"><span class="tag t-srv">Pagos de servicios</span></th><td id="cantidadServicios" class="text-right">0</td></tr>
+        </tbody>
+        <tfoot><tr><th scope="row">Total de transacciones</th><td id="cantidadTotal" class="text-right font-weight-bold">0</td></tr></tfoot>
+      </table>
+    </div>
+  </section>
+  <div class="d-flex flex-wrap">
+    <a href="menu.html" class="btn btn-pk mr-2 mb-2 d-inline-flex align-items-center px-4">Volver al menú</a>
+    <a href="historial.html" class="btn btn-borde mb-2 d-inline-flex align-items-center px-4">Ver historial</a>
   </div>
-  <a href="menu.html" class="btn btn-pk mr-2 mb-2 d-inline-flex align-items-center px-4">Volver al menú</a>
-  <a href="historial.html" class="btn btn-borde mb-2 d-inline-flex align-items-center px-4">Ver historial</a>
 </main>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+<script src="js/graficas.js"></script>
 </body>
 </html>
