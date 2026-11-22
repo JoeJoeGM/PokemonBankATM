@@ -1,9 +1,9 @@
 (function () {
   "use strict";
 
-  // Contrato actual de menu.html. Cambiar esta clave en conjunto con el equipo
-  // si el módulo de memoria de Fase 2 adopta otro nombre de almacenamiento.
-  const CLAVE_HISTORIAL = "pokemonBankHistorial";
+  // Contrato de Fase 2 acordado por el equipo: arreglo JSON de movimientos.
+  // usuarioATM guarda los datos de la cuenta; esta vista solo lee transacciones.
+  const CLAVE_HISTORIAL = "transaccionesATM";
   const TIPOS = ["Depósito", "Retiro", "Servicios"];
   const ETIQUETAS = ["Depósitos", "Retiros", "Pagos de servicios"];
   const IDS_CANTIDADES = ["cantidadDepositos", "cantidadRetiros", "cantidadServicios"];

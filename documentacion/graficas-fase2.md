@@ -11,7 +11,7 @@ El módulo 4 reemplaza las gráficas estáticas de `graficas.html` por una gráf
 
 ## Contrato de integración
 
-La rama principal actualmente escribe en `localStorage["pokemonBankHistorial"]`, un arreglo JSON con este formato:
+El equipo acordó guardar los movimientos en `localStorage["transaccionesATM"]`. Su valor debe ser un arreglo JSON (inicialmente `[]`); cada movimiento tiene este formato:
 
 ```json
 [
@@ -23,7 +23,9 @@ La rama principal actualmente escribe en `localStorage["pokemonBankHistorial"]`,
 
 `tipo` debe coincidir con `Depósito`, `Retiro` o `Servicios`. Los cuatro servicios se agrupan en una categoría. Los montos no intervienen en el conteo y consultar el saldo no genera una transacción. Entradas nulas y tipos desconocidos se ignoran.
 
-La guía propone `transaccionesATM` como ejemplo; esa clave aún no existe en la rama principal revisada. Si el integrante 1 cambia el contrato, actualizar `CLAVE_HISTORIAL` y, si corresponde, `TIPOS` en `js/graficas.js` junto con los módulos de transacciones e historial. No leer ambos historiales ni unirlos: eso podría duplicar movimientos.
+El objeto `usuarioATM` contiene `nombre`, `pin`, `cuenta` y `saldo`. La persona 2 debe mostrar los datos y actualizar el saldo dentro de ese objeto, además de agregar cada movimiento al arreglo `transaccionesATM`. La gráfica no necesita leer el PIN ni el saldo.
+
+Este módulo utiliza exclusivamente el contrato de Fase 2; no lee ni migra `pokemonBankHistorial` o `pokemonBankSaldo`. El `menu.html` de la base de Fase 1 todavía usa esas claves antiguas: la prueba integral desde el menú requiere integrar el trabajo de la persona 2. No unir historiales antiguos y nuevos, para evitar duplicados.
 
 Esta pantalla solamente lee los datos. No inicializa usuarios, altera el saldo ni borra historial.
 
@@ -48,7 +50,7 @@ Ejecutar desde la raíz del repositorio con Node.js:
 node --test tests/graficas.test.cjs
 ```
 
-Prueba manual con un servidor estático y almacenamiento de prueba independiente:
+Prueba manual con un servidor estático y almacenamiento de prueba independiente. Para las operaciones desde el menú, usar el módulo de la persona 2 ya conectado a `transaccionesATM`:
 
 1. Abrir `graficas.html` sin historial: aparecen ceros y un mensaje de estado vacío.
 2. Desde el menú, realizar dos depósitos con montos distintos, un retiro y un pago. La gráfica debe indicar 2, 1 y 1; total 4.
