@@ -1,27 +1,11 @@
-/**
- * Módulo de Transacciones y Validaciones (Integrante 2)
- * Proyecto: Pokémon Bank ATM
- *
- * Responsabilidades:
- * 1. Ejecutar las operaciones de depósito, retiro, consulta de saldo y pago
- *    de servicios desde menu.html.
- * 2. Validar los montos con ValidateJS (vacíos, letras, negativos, decimales
- *    y montos superiores al saldo disponible).
- * 3. Persistir el saldo en usuarioATM y cada movimiento en transaccionesATM.
- * 4. Sustituir prompt()/alert() por diálogos de SweetAlert2.
- *
- * Contrato de datos compartido con el equipo:
- *   localStorage.usuarioATM       -> { nombre, pin, cuenta, saldo }
- *   localStorage.transaccionesATM -> [{ fecha, fechaISO, tipo, detalle, monto, saldoDespues }]
- *   tipo: "Depósito" | "Retiro" | "Servicios"
- */
+
 (function () {
   "use strict";
 
   const CLAVE_USUARIO = "usuarioATM";
   const CLAVE_TRANSACCIONES = "transaccionesATM";
 
-  // Datos oficiales de respaldo: se usan solo si usuarioATM aún no existe.
+  // Datos oficiales de respaldo y se usan solo si usuarioATM aún no existe.
   const USUARIO_RESPALDO = {
     nombre: "Ash Ketchum",
     pin: "1234",
@@ -29,14 +13,7 @@
     saldo: 500.0
   };
 
-  /* ------------------------------------------------------------------ *
-   * Almacenamiento
-   * ------------------------------------------------------------------ */
 
-  /**
-   * Lee usuarioATM y normaliza el saldo. Si la clave no existe o el JSON
-   * está dañado, devuelve una copia de los datos oficiales de Ash.
-   */
   function leerUsuario() {
     const usuario = Object.assign({}, USUARIO_RESPALDO);
 
@@ -47,7 +24,7 @@
       const datos = JSON.parse(guardado);
       if (!datos || typeof datos !== "object") return usuario;
 
-      // Copia solo los campos definidos para no sobrescribir con null/undefined.
+      // Copia solo los campos definidos para no sobrescribir con null
       Object.keys(datos).forEach(function (clave) {
         if (datos[clave] !== undefined && datos[clave] !== null) {
           usuario[clave] = datos[clave];
@@ -62,10 +39,7 @@
     return usuario;
   }
 
-  /**
-   * Guarda el objeto del usuario en localStorage.
-   * Devuelve true si la escritura fue exitosa.
-   */
+
   function guardarUsuario(usuario) {
     try {
       localStorage.setItem(CLAVE_USUARIO, JSON.stringify(usuario));
@@ -75,10 +49,7 @@
     }
   }
 
-  /**
-   * Devuelve el arreglo de transacciones. Si no existe o está dañado,
-   * devuelve un arreglo vacío para no romper la pantalla.
-   */
+
   function leerTransacciones() {
     try {
       const guardado = localStorage.getItem(CLAVE_TRANSACCIONES);
@@ -91,10 +62,7 @@
     }
   }
 
-  /**
-   * Guarda el arreglo completo de transacciones.
-   * Devuelve true si la escritura fue exitosa.
-   */
+
   function guardarTransacciones(transacciones) {
     try {
       localStorage.setItem(CLAVE_TRANSACCIONES, JSON.stringify(transacciones));
@@ -104,10 +72,7 @@
     }
   }
 
-  /**
-   * Restaura una clave de localStorage a su valor anterior. Se usa para
-   * deshacer una escritura parcial si falla el guardado de una operación.
-   */
+
   function restaurarClave(clave, valorPrevio) {
     try {
       if (valorPrevio === null) {
@@ -116,13 +81,10 @@
         localStorage.setItem(clave, valorPrevio);
       }
     } catch (error) {
-      // Si el almacenamiento no está disponible, no hay más que hacer.
+      // Si el almacenamiento no está disponible
     }
   }
 
-  /* ------------------------------------------------------------------ *
-   * Utilidades de dinero
-   * ------------------------------------------------------------------ */
 
   // Convierte un monto a centavos para operar sin errores de decimales.
   function aCentavos(valor) {
@@ -144,16 +106,7 @@
     });
   }
 
-  /* ------------------------------------------------------------------ *
-   * Registro de movimientos
-   * ------------------------------------------------------------------ */
 
-  /**
-   * Guarda el nuevo saldo del usuario y agrega el movimiento al historial.
-   * Ambas escrituras se intentan juntas; si una falla, se restauran los
-   * valores anteriores para que el saldo y el historial no queden
-   * desincronizados.
-   */
   function registrar(usuario, tipo, detalle, monto) {
     let usuarioPrevio = null;
     let transaccionesPrevias = null;
@@ -183,19 +136,11 @@
       return false;
     }
 
-    // Avisa a las demás vistas (por ejemplo, la gráfica) que los datos cambiaron.
+    // Avisa a las demás vistas que los datos cambiaron.
     window.dispatchEvent(new Event("pokemonbank:transacciones-actualizadas"));
     return true;
   }
 
-  /* ------------------------------------------------------------------ *
-   * Validación con ValidateJS
-   * ------------------------------------------------------------------ */
-
-  /**
-   * Construye las reglas de ValidateJS para el campo "monto".
-   * Cuando se recibe un saldo máximo, también rechaza montos superiores.
-   */
   function reglasMonto(saldoMaximo) {
     const numericality = {
       greaterThan: 0,
@@ -219,10 +164,7 @@
     };
   }
 
-  /**
-   * Valida el monto con ValidateJS y devuelve el primer mensaje de error,
-   * o null si el valor es correcto.
-   */
+
   function validarMonto(valor, saldoMaximo) {
     if (typeof validate !== "function") {
       return "No se pudo cargar el validador. Revisa tu conexión.";
@@ -237,19 +179,13 @@
     return null;
   }
 
-  /* ------------------------------------------------------------------ *
-   * Diálogos con SweetAlert2
-   * ------------------------------------------------------------------ */
 
   // Comprueba que SweetAlert2 esté disponible en la página.
   function sweetAlertDisponible() {
     return typeof Swal !== "undefined";
   }
 
-  /**
-   * Muestra un mensaje con SweetAlert2. Si la librería no cargó, usa el
-   * contenedor #mensaje de menu.html como respaldo, sin alert() nativo.
-   */
+
   function mostrarMensaje(tipo, titulo, texto) {
     if (sweetAlertDisponible()) {
       Swal.fire({
@@ -270,10 +206,7 @@
     }
   }
 
-  /**
-   * Pide un monto con SweetAlert2 y lo valida con ValidateJS antes de
-   * permitir continuar. Devuelve el monto como número o null si se cancela.
-   */
+
   async function pedirMonto(titulo, texto, saldoMaximo) {
     if (!sweetAlertDisponible()) {
       mostrarMensaje("error", "Librería no disponible", "No se pudo cargar SweetAlert2.");
@@ -304,10 +237,7 @@
     return desdeCentavos(aCentavos(String(resultado.value).trim()));
   }
 
-  /**
-   * Pide confirmación antes de aplicar una operación.
-   * Devuelve true si el usuario confirma.
-   */
+
   async function confirmar(titulo, texto) {
     if (!sweetAlertDisponible()) {
       mostrarMensaje("error", "Librería no disponible", "No se pudo cargar SweetAlert2.");
@@ -328,13 +258,7 @@
     return resultado.isConfirmed;
   }
 
-  /* ------------------------------------------------------------------ *
-   * Operaciones del cajero
-   * ------------------------------------------------------------------ */
 
-  /**
-   * Depósito: suma el monto al saldo y registra el movimiento.
-   */
   async function depositar() {
     const monto = await pedirMonto(
       "Depositar dinero",
@@ -366,10 +290,7 @@
     );
   }
 
-  /**
-   * Retiro: valida que haya saldo suficiente, resta el monto y registra
-   * el movimiento.
-   */
+
   async function retirar() {
     const saldoActual = leerUsuario().saldo;
     const monto = await pedirMonto(
@@ -411,9 +332,7 @@
     );
   }
 
-  /**
-   * Consulta de saldo: solo informa el saldo actual y no genera movimientos.
-   */
+
   function consultarSaldo() {
     const usuario = leerUsuario();
     mostrarMensaje(
@@ -423,10 +342,7 @@
     );
   }
 
-  /**
-   * Pago de servicios: valida el saldo, resta el monto y registra el
-   * movimiento con el nombre del servicio como detalle.
-   */
+
   async function pagarServicio(servicio) {
     const nombreServicio = String(servicio || "Servicio").trim();
     const saldoActual = leerUsuario().saldo;
@@ -471,15 +387,7 @@
     );
   }
 
-  /* ------------------------------------------------------------------ *
-   * Interfaz
-   * ------------------------------------------------------------------ */
 
-  /**
-   * Refresca los datos visibles del menú. Los elementos de nombre y cuenta
-   * se actualizan solo si existen, para que el módulo funcione aunque el
-   * HTML todavía no tenga esos identificadores.
-   */
   function actualizarVista() {
     const usuario = leerUsuario();
 
@@ -493,10 +401,7 @@
     if (saldo) saldo.textContent = formatearDinero(usuario.saldo);
   }
 
-  /**
-   * Enlaza los botones y chips de menu.html con las operaciones y mantiene
-   * la vista sincronizada si los datos cambian en otra pestaña.
-   */
+
   function iniciar() {
     actualizarVista();
 
@@ -511,16 +416,16 @@
 
     document.querySelectorAll(".servicio").forEach(function (boton) {
       boton.addEventListener("click", function () {
-        // Devuelve la promesa para poder esperar la operación en pruebas.
+       
         return pagarServicio(this.dataset.servicio);
       });
     });
 
-    // Al volver con Atrás/Adelante o al recuperar el foco, relee el saldo.
+    // Al volver con atras o  adelante o al recuperar el foco, relee el saldo.
     window.addEventListener("pageshow", actualizarVista);
     window.addEventListener("focus", actualizarVista);
 
-    // storage avisa de cambios hechos en OTRA pestaña del mismo sitio.
+    // storage avisa de cambios hechos en otra pestaña del mismo sitio.
     window.addEventListener("storage", function (evento) {
       if (
         evento.key === CLAVE_USUARIO ||
@@ -532,8 +437,8 @@
     });
   }
 
-  // Ejecuta iniciar cuando el DOM esté listo, incluso si el script se carga
-  // después de que ocurriera DOMContentLoaded.
+  
+  
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", iniciar);
   } else {
