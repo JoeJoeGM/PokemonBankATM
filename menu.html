@@ -9,6 +9,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
+
+
 <body>
 
 <nav class="navbar navbar-expand-md navbar-pk px-4">
@@ -46,19 +48,19 @@
         <div class="d-flex flex-wrap justify-content-between align-items-center">
             <div>
                 <small class="text-muted">Bienvenido</small>
-                <h3 class="mb-0 font-weight-bold">Adrian Castillo</h3>
+                <h3 class="mb-0 font-weight-bold">Ash Ketchum</h3>
             </div>
 
             <div class="text-md-right mt-3 mt-md-0">
                 <small class="text-muted">Número de cuenta</small>
-                <p class="mb-0 font-weight-bold">0001-2345-6789</p>
+                <p class="mb-0 font-weight-bold">0987654321</p>
             </div>
         </div>
 
         <hr>
 
         <small class="text-muted">Saldo disponible</small>
-        <h2 class="font-weight-bold mb-0" id="saldo">$1,000.00</h2>
+        <h2 class="font-weight-bold mb-0" id="saldo">$500.00</h2>
     </section>
 
     <h4 class="font-weight-bold mb-3">¿Qué deseas hacer?</h4>
@@ -129,144 +131,10 @@
 
 </main>
 
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-    const saldoElemento = document.getElementById("saldo");
-
-    let saldoGuardado = localStorage.getItem("pokemonBankSaldo");
-    let saldo = saldoGuardado !== null ? Number(saldoGuardado) : 1000;
-
-    let historial;
-
-    try {
-        historial = JSON.parse(
-            localStorage.getItem("pokemonBankHistorial") || "[]"
-        );
-
-        if (!Array.isArray(historial)) historial = [];
-    } catch (error) {
-        historial = [];
-    }
-
-    function actualizarSaldo() {
-        saldoElemento.textContent = saldo.toLocaleString("en-US", {
-            style: "currency",
-            currency: "USD"
-        });
-
-        localStorage.setItem("pokemonBankSaldo", saldo.toFixed(2));
-    }
-
-    function registrar(tipo, detalle, monto) {
-        historial.unshift({
-            fecha: new Date().toLocaleDateString("es-SV"),
-            tipo: tipo,
-            detalle: detalle,
-            monto: monto
-        });
-
-        localStorage.setItem(
-            "pokemonBankHistorial",
-            JSON.stringify(historial)
-        );
-    }
-
-    function pedirMonto(titulo) {
-        const entrada = prompt(
-            titulo + "\nIngresa el monto en dólares:"
-        );
-
-        if (entrada === null) return null;
-
-        const texto = entrada.trim();
-
-        if (!/^\d+(\.\d{1,2})?$/.test(texto)) {
-            alert("Ingresa un monto válido. Ejemplo: 25.50");
-            return null;
-        }
-
-        const monto = Number(texto);
-
-        if (!Number.isFinite(monto) || monto <= 0) {
-            alert("El monto debe ser mayor que cero.");
-            return null;
-        }
-
-        return Math.round(monto * 100) / 100;
-    }
-
-    function depositar() {
-        const monto = pedirMonto("Depósito");
-
-        if (monto === null) return;
-
-        saldo = Math.round((saldo + monto) * 100) / 100;
-
-        registrar("Depósito", "Depósito en cuenta", monto);
-        actualizarSaldo();
-
-        alert("Depósito realizado correctamente.");
-    }
-
-    function retirar() {
-        const monto = pedirMonto("Retiro");
-
-        if (monto === null) return;
-
-        if (monto > saldo) {
-            alert("Fondos insuficientes.");
-            return;
-        }
-
-        saldo = Math.round((saldo - monto) * 100) / 100;
-
-        registrar("Retiro", "Retiro de efectivo", monto);
-        actualizarSaldo();
-
-        alert("Retiro realizado correctamente.");
-    }
-
-    function pagarServicio(servicio) {
-        const monto = pedirMonto("Pago de " + servicio);
-
-        if (monto === null) return;
-
-        if (monto > saldo) {
-            alert("Fondos insuficientes.");
-            return;
-        }
-
-        saldo = Math.round((saldo - monto) * 100) / 100;
-
-        registrar("Servicios", servicio, monto);
-        actualizarSaldo();
-
-        alert("Pago de " + servicio + " realizado correctamente.");
-    }
-    
-    document.getElementById("btnDepositar")
-        .addEventListener("click", depositar);
-
-    document.getElementById("btnRetirar")
-        .addEventListener("click", retirar);
-        
-
-    document.getElementById("btnConsultar")
-        .addEventListener("click", function () {
-            alert("Saldo disponible: $" + saldo.toFixed(2));
-        });
-
-    document.querySelectorAll(".servicio").forEach(function (boton) {
-        boton.addEventListener("click", function () {
-            pagarServicio(this.dataset.servicio);
-        });
-    });
-
-    actualizarSaldo();
-});
-</script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="js/auth.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/validate.js/0.13.1/validate.min.js"></script>
+<script src="js/transacciones.js"></script>
+
 
 </body>
 </html>
