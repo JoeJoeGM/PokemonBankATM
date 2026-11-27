@@ -121,14 +121,16 @@
     const transacciones = leerTransacciones();
     const ahora = new Date();
 
-    transacciones.unshift({
-      fecha: ahora.toLocaleDateString("es-SV"),
-      fechaISO: ahora.toISOString(),
-      tipo: tipo,
-      detalle: detalle,
-      monto: desdeCentavos(aCentavos(monto)),
-      saldoDespues: desdeCentavos(aCentavos(usuario.saldo))
-    });
+    const nuevaTransaccion = {
+        fecha: ahora.toLocaleDateString("es-SV"),
+        fechaISO: ahora.toISOString(),
+        tipo: tipo,
+        detalle: detalle,
+        monto: desdeCentavos(aCentavos(monto)),
+        saldoDespues: desdeCentavos(aCentavos(usuario.saldo))
+    };
+
+    transacciones.unshift(nuevaTransaccion);
 
     if (!guardarUsuario(usuario) || !guardarTransacciones(transacciones)) {
       restaurarClave(CLAVE_USUARIO, usuarioPrevio);
@@ -138,7 +140,7 @@
 
     // Avisa a las demás vistas que los datos cambiaron.
     window.dispatchEvent(new Event("pokemonbank:transacciones-actualizadas"));
-    return true;
+    return nuevaTransaccion;
   }
 
   function reglasMonto(saldoMaximo) {
@@ -277,10 +279,19 @@
     const nuevoSaldo = desdeCentavos(aCentavos(usuario.saldo) + aCentavos(monto));
     usuario.saldo = nuevoSaldo;
 
-    if (!registrar(usuario, "Depósito", "Depósito en cuenta", monto)) {
-      mostrarMensaje("error", "No se pudo completar", "Intenta nuevamente.");
-      return;
+    const transaccion = registrar(
+      usuario,
+      "Depósito",
+      "Depósito en cuenta",
+      monto
+    );
+
+    if (!transaccion) {
+        mostrarMensaje("error", "No se pudo completar", "Intenta nuevamente.");
+        return;
     }
+
+    generarComprobantePDF(transaccion, usuario);
 
     actualizarVista();
     mostrarMensaje(
@@ -319,10 +330,19 @@
     const nuevoSaldo = desdeCentavos(aCentavos(usuario.saldo) - aCentavos(monto));
     usuario.saldo = nuevoSaldo;
 
-    if (!registrar(usuario, "Retiro", "Retiro de efectivo", monto)) {
+    const transaccion = registrar(
+      usuario,
+      "Retiro",
+      "Retiro de efectivo",
+      monto
+    );
+
+    if (!transaccion) {
       mostrarMensaje("error", "No se pudo completar", "Intenta nuevamente.");
       return;
     }
+
+    generarComprobantePDF(transaccion, usuario);
 
     actualizarVista();
     mostrarMensaje(
@@ -373,10 +393,19 @@
     const nuevoSaldo = desdeCentavos(aCentavos(usuario.saldo) - aCentavos(monto));
     usuario.saldo = nuevoSaldo;
 
-    if (!registrar(usuario, "Servicios", nombreServicio, monto)) {
+    const transaccion = registrar(
+      usuario,
+      "Servicios",
+      nombreServicio,
+      monto
+    );
+
+    if (!transaccion) {
       mostrarMensaje("error", "No se pudo completar", "Intenta nuevamente.");
       return;
     }
+
+generarComprobantePDF(transaccion, usuario);
 
     actualizarVista();
     mostrarMensaje(
