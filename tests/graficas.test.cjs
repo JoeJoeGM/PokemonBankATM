@@ -7,7 +7,7 @@ const path = require("node:path");
 const vm = require("node:vm");
 
 const codigo = fs.readFileSync(path.join(__dirname, "../js/graficas.js"), "utf8");
-const CLAVE = "pokemonBankHistorial";
+const CLAVE = "transaccionesATM";
 
 // Ejecuta el módulo real con los límites externos del navegador simulados.
 // No copia la lógica de conteo ni la lógica de actualización de la aplicación.
@@ -145,7 +145,7 @@ test("storage actualiza otra pestaña, ignora otras claves y procesa un borrado 
   const app = cargar(t);
   const instancia = app.graficas[0];
   app.almacenamiento.set(CLAVE, JSON.stringify([{ tipo: "Depósito", monto: 100 }]));
-  app.emitir("storage", { key: "pokemonBankSaldo" });
+  app.emitir("storage", { key: "usuarioATM" });
   assert.deepEqual(app.cantidades(), [0, 0, 0]);
   assert.equal(app.lecturas.length, 1);
   app.emitir("storage", { key: CLAVE });
@@ -159,6 +159,25 @@ test("storage actualiza otra pestaña, ignora otras claves y procesa un borrado 
   assert.deepEqual(app.cantidades(), [0, 0, 0]);
   assert.equal(app.elemento("estadoGrafica").hidden, false);
   assert.equal(instancia.actualizaciones, 2);
+});
+
+test("Usa transaccionesATM aunque exista un historial de Fase 1", t => {
+  const app = cargar(t, { historial: JSON.stringify([{ tipo: "Servicios", monto: 50 }]) });
+  app.almacenamiento.set("pokemonBankHistorial", JSON.stringify([
+    { tipo: "Depósito", monto: 100 }, { tipo: "Retiro", monto: 10 }
+  ]));
+  app.almacenamiento.set("usuarioATM", JSON.stringify({
+    nombre: "Ash Ketchum", pin: "1234", cuenta: "0987654321", saldo: 500
+  }));
+  app.emitir("pageshow");
+  assert.deepEqual(app.cantidades(), [0, 0, 1]);
+  app.almacenamiento.delete(CLAVE);
+  app.emitir("storage", { key: CLAVE });
+  assert.deepEqual(app.cantidades(), [0, 0, 0]);
+  const lecturasAntes = app.lecturas.length;
+  app.emitir("storage", { key: "pokemonBankHistorial" });
+  assert.equal(app.lecturas.length, lecturasAntes);
+  assert.equal(app.lecturas.every(clave => clave === "transaccionesATM"), true);
 });
 
 for (const evento of ["pageshow", "focus", "pokemonbank:transacciones-actualizadas"]) {

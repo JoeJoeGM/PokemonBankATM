@@ -15,7 +15,7 @@ Implementa operaciones bancarias basicas con persistencia local y visualizacion 
 | **Autenticacion** | Login con PIN de 4 digitos via teclado numerico en pantalla (input virtual) |
 | **Operaciones** | Depósitos, retiros (validación de fondos), consulta de saldo, pago de servicios (4 categorias) |
 | **Historial** | Registro cronológico con filtros por tipo (Depósito/Retiro/Servicios) |
-| **Analisis** | Gráfica de dona (distribución %) + barras horizontales (montos por categoria) |
+| **Analisis** | Chart.js: cantidad de depósitos, retiros y pagos desde `transaccionesATM`, con actualización automática |
 | **Demo librerias** | Ejemplos integrados: SweetAlert2, Chart.js, jsPDF + autoTable, Validate.js |
 
 ---
@@ -46,7 +46,9 @@ Implementa operaciones bancarias basicas con persistencia local y visualizacion 
 ├── atm.html                   # Login PIN
 ├── menu.html                  # Dashboard + lógica ATM (JS inline)
 ├── historial.html             # Tabla + filtros JS
-├── graficas.html              # SVG donut + barras CSS
+├── graficas.html              # Gráfica dinámica y tabla de cantidades
+├── js/graficas.js             # Lectura de transaccionesATM y conteo por tipo
+├── css/graficas.css           # Estilos de la pantalla de análisis
 ├── demosLibrerias-Index.html  # Demos librerías
 ├── styles.css                 # Tema principal (Bootstrap override)
 └── ejemplolibrerias/js/       # 4 módulos demo (SweetAlert, jsPDF, Chart, Validate)
@@ -65,5 +67,8 @@ Implementa operaciones bancarias basicas con persistencia local y visualizacion 
 ## Documentación
 
 - [Entregable (Word)](documentacion/entregable.docx)
+- [Integración y pruebas de gráficas de Fase 2](documentacion/graficas-fase2.md)
+
+El módulo de gráficas utiliza el contrato acordado para Fase 2: `transaccionesATM` es un arreglo JSON con tipos `Depósito`, `Retiro` y `Servicios`. La conexión con las operaciones del menú requiere integrar el módulo de la persona 2, que debe registrar allí los movimientos y usar `usuarioATM` para los datos de la cuenta y el saldo. El menú de la base de Fase 1 todavía utiliza las claves antiguas.
 
 ---
