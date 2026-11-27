@@ -12,157 +12,268 @@
 
 <body>
 
-    <nav class="navbar navbar-expand-md navbar-pk px-4">
-        <a class="navbar-brand d-flex align-items-center" href="menu.html">
-            <svg class="pokeball" viewBox="0 0 30 30" aria-hidden="true">
-                <circle cx="15" cy="15" r="13" fill="#fff"/>
-                <path d="M2 15a13 13 0 0 1 26 0z" fill="#E8732A"/>
-                <path d="M2 15h26" stroke="#14213D" stroke-width="3"/>
-                <circle cx="15" cy="15" r="4.5" fill="#fff" stroke="#14213D" stroke-width="2.5"/>
-            </svg>
-            Pokémon <span class="ml-1">Bank</span>
-        </a>
+<nav class="navbar navbar-expand-md navbar-pk px-4">
+    <a class="navbar-brand d-flex align-items-center" href="menu.html">
+        <svg class="pokeball" viewBox="0 0 30 30" aria-hidden="true">
+            <circle cx="15" cy="15" r="13" fill="#fff"/>
+            <path d="M2 15a13 13 0 0 1 26 0z" fill="#E8732A"/>
+            <path d="M2 15h26" stroke="#14213D" stroke-width="3"/>
+            <circle cx="15" cy="15" r="4.5" fill="#fff" stroke="#14213D" stroke-width="2.5"/>
+        </svg>
+        Pokémon <span class="ml-1">Bank</span>
+    </a>
 
-        <button class="navbar-toggler border-light" type="button"
-            data-toggle="collapse" data-target="#menuNav"
-            aria-controls="menuNav" aria-expanded="false"
-            aria-label="Abrir menú">
-            <span class="navbar-toggler-icon" style="filter:invert(1)"></span>
+    <button class="navbar-toggler border-light" type="button"
+        data-toggle="collapse" data-target="#menuNav"
+        aria-controls="menuNav" aria-expanded="false"
+        aria-label="Abrir menú">
+        <span class="navbar-toggler-icon" style="filter:invert(1)"></span>
+    </button>
+
+    <div class="collapse navbar-collapse justify-content-end" id="menuNav">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="menu.html">Menú</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link salir" href="index.html">Salir</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<main class="container py-4">
+
+    <h1 class="font-weight-bold mb-3">Historial de transacciones</h1>
+
+    <div class="mb-3">
+        <button type="button" class="chip mr-2 mb-2 filtro activo" data-tipo="todos">
+            Todos
         </button>
+        <button type="button" class="chip mr-2 mb-2 filtro" data-tipo="Depósito">
+            Depósito
+        </button>
+        <button type="button" class="chip mr-2 mb-2 filtro" data-tipo="Retiro">
+            Retiro
+        </button>
+        <button type="button" class="chip mb-2 filtro" data-tipo="Servicios">
+            Pago de servicios
+        </button>
+    </div>
 
-        <div class="collapse navbar-collapse justify-content-end" id="menuNav">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="menu.html">Menú</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link salir" href="index.html">Salir</a>
-                </li>
-            </ul>
+    <section class="card card-pk mb-3 scroll-card">
+        <div class="table-responsive">
+            <table class="table table-pk mb-0">
+                <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Tipo</th>
+                        <th>Detalle</th>
+                        <th class="text-right">Monto</th>
+                        <th>Comprobante</th>
+                    </tr>
+                </thead>
+
+                <tbody id="tablaTransacciones">
+                </tbody>
+            </table>
         </div>
-    </nav>
+    </section>
 
-    <main class="container py-4">
+    <a href="menu.html" class="btn btn-pk mr-2 mb-2 px-4">
+        Volver al menú
+    </a>
 
-        <h1 class="font-weight-bold mb-3">Historial de transacciones</h1>
+    <a href="graficas.html" class="btn btn-borde mb-2 px-4">
+        Ver gráficas
+    </a>
 
-        <div class="mb-3">
-            <button type="button" class="chip mr-2 mb-2 filtro activo" data-tipo="todos">
-                Todos
-            </button>
-            <button type="button" class="chip mr-2 mb-2 filtro" data-tipo="Depósito">
-                Depósito
-            </button>
-            <button type="button" class="chip mr-2 mb-2 filtro" data-tipo="Retiro">
-                Retiro
-            </button>
-            <button type="button" class="chip mb-2 filtro" data-tipo="Servicios">
-                Pago de servicios
-            </button>
-        </div>
+</main>
 
-        <section class="card card-pk mb-3 scroll-card">
-            <div class="table-responsive">
-                <table class="table table-pk mb-0">
-                    <thead>
-                        <tr>
-                            <th>Fecha</th>
-                            <th>Tipo</th>
-                            <th>Detalle</th>
-                            <th class="text-right">Monto</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        <tr>
-                            <td>01/10/2026</td>
-                            <td><span class="tag t-dep">Depósito</span></td>
-                            <td>Depósito en efectivo</td>
-                            <td class="text-right pos">+ $500.00</td>
-                        </tr>
-                        <tr>
-                            <td>02/10/2026</td>
-                            <td><span class="tag t-ret">Retiro</span></td>
-                            <td>Retiro en efectivo</td>
-                            <td class="text-right neg">− $100.00</td>
-                        </tr>
-                        <tr>
-                            <td>03/10/2026</td>
-                            <td><span class="tag t-srv">Servicios</span></td>
-                            <td>Energía eléctrica</td>
-                            <td class="text-right neg">− $35.40</td>
-                        </tr>
-                        <tr>
-                            <td>04/10/2026</td>
-                            <td><span class="tag t-srv">Servicios</span></td>
-                            <td>Internet</td>
-                            <td class="text-right neg">− $29.99</td>
-                        </tr>
-                        <tr>
-                            <td>05/10/2026</td>
-                            <td><span class="tag t-dep">Depósito</span></td>
-                            <td>Depósito en efectivo</td>
-                            <td class="text-right pos">+ $200.00</td>
-                        </tr>
-                        <tr>
-                            <td>05/10/2026</td>
-                            <td><span class="tag t-srv">Servicios</span></td>
-                            <td>Agua potable</td>
-                            <td class="text-right neg">− $12.50</td>
-                        </tr>
-                        <tr>
-                            <td>06/10/2026</td>
-                            <td><span class="tag t-ret">Retiro</span></td>
-                            <td>Retiro en efectivo</td>
-                            <td class="text-right neg">− $60.00</td>
-                        </tr>
-                        <tr>
-                            <td>07/10/2026</td>
-                            <td><span class="tag t-srv">Servicios</span></td>
-                            <td>Telefonía</td>
-                            <td class="text-right neg">− $18.00</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
-
-        <a href="menu.html" class="btn btn-pk mr-2 mb-2 px-4">
-            Volver al menú
-        </a>
-        <a href="graficas.html" class="btn btn-borde mb-2 px-4">
-            Ver gráficas
-        </a>
-
-    </main>
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-
-    <script>
-        const botones = document.querySelectorAll('.filtro');
-        const filas = document.querySelectorAll('.table-pk tbody tr');
-
-        botones.forEach(boton => {
-            boton.addEventListener('click', function () {
-                const tipoSeleccionado = this.dataset.tipo;
-
-                botones.forEach(b => b.classList.remove('activo'));
-                this.classList.add('activo');
-
-                filas.forEach(fila => {
-                    const tipo = fila.querySelector('.tag').textContent.trim();
-
-                    fila.style.display =
-                        tipoSeleccionado === 'todos' || tipo === tipoSeleccionado
-                            ? ''
-                            : 'none';
-                });
-            });
-        });
-    </script>
-
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="js/auth.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const tabla = document.getElementById("tablaTransacciones");
+    const botones = document.querySelectorAll(".filtro");
+
+    // Obtener movimientos almacenados
+    function obtenerTransacciones() {
+        return JSON.parse(
+            localStorage.getItem("pokemonBankHistorial") ||
+            localStorage.getItem("transaccionesATM") ||
+            "[]"
+        );
+    }
+
+    // Formatear monto
+    function formatoMonto(monto) {
+        return Number(monto).toLocaleString("en-US", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        });
+    }
+
+    // Mostrar transacciones
+    function mostrarTransacciones(tipoSeleccionado = "todos") {
+
+        const transacciones = obtenerTransacciones();
+
+        tabla.innerHTML = "";
+
+        const filtradas = transacciones.filter(transaccion =>
+            tipoSeleccionado === "todos" ||
+            transaccion.tipo === tipoSeleccionado
+        );
+
+        if (filtradas.length === 0) {
+            tabla.innerHTML = `
+                <tr>
+                    <td colspan="5" class="text-center text-muted py-4">
+                        No hay transacciones registradas.
+                    </td>
+                </tr>
+            `;
+            return;
+        }
+
+        filtradas.forEach(transaccion => {
+
+            let clase = "";
+            let montoClase = "";
+            let signo = "";
+
+            if (transaccion.tipo === "Depósito") {
+                clase = "t-dep";
+                montoClase = "pos";
+                signo = "+";
+            } else if (transaccion.tipo === "Retiro") {
+                clase = "t-ret";
+                montoClase = "neg";
+                signo = "−";
+            } else {
+                clase = "t-srv";
+                montoClase = "neg";
+                signo = "−";
+            }
+
+            const fila = document.createElement("tr");
+
+            const fecha = document.createElement("td");
+            fecha.textContent = transaccion.fecha || "";
+
+            const tipo = document.createElement("td");
+            const etiqueta = document.createElement("span");
+            etiqueta.className = `tag ${clase}`;
+            etiqueta.textContent = transaccion.tipo;
+            tipo.appendChild(etiqueta);
+
+            const detalle = document.createElement("td");
+            detalle.textContent = transaccion.detalle || "";
+
+            const monto = document.createElement("td");
+            monto.className = `text-right ${montoClase}`;
+            monto.textContent = `${signo} $${formatoMonto(transaccion.monto)}`;
+        
+            const comprobante = document.createElement("td");
+
+            const botonPDF = document.createElement("button");
+            botonPDF.textContent = "Descargar PDF";
+            botonPDF.className = "btn btn-sm btn-outline-warning";
+
+            botonPDF.addEventListener("click", () => {
+                generarComprobante(transaccion);
+            });
+
+            comprobante.appendChild(botonPDF);
+
+            fila.append(fecha, tipo, detalle, monto, comprobante);
+            tabla.appendChild(fila);
+        });
+    }
+
+    // Filtros
+    botones.forEach(boton => {
+
+        boton.addEventListener("click", function () {
+
+            botones.forEach(b => b.classList.remove("activo"));
+            this.classList.add("activo");
+
+            mostrarTransacciones(this.dataset.tipo);
+        });
+
+    });
+
+    // Comprobante
+    function generarComprobante(transaccion) {
+
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+
+        const usuarioGuardado = JSON.parse(
+            localStorage.getItem("usuarioATM")
+        );
+
+        const nombre = Array.isArray(usuarioGuardado)
+            ? usuarioGuardado[0]?.nombre
+            : usuarioGuardado?.nombre;
+
+        const saldo = Number(transaccion.saldoDespues || 0);
+
+        const fecha = transaccion.fecha.replaceAll("/", "-");
+
+        doc.setFontSize(20);
+        doc.text("POKEMON BANK", 20, 25);
+
+        doc.setFontSize(16);
+        doc.text("Comprobante de transaccion", 20, 45);
+
+        doc.setFontSize(12);
+        doc.text(`Cliente: ${nombre || "Usuario"}`, 20, 65);
+        doc.text(`Fecha: ${transaccion.fecha}`, 20, 80);
+        doc.text(`Operacion: ${transaccion.tipo}`, 20, 95);
+        doc.text(`Detalle: ${transaccion.detalle}`, 20, 110);
+
+        doc.text(
+            `Monto: $${formatoMonto(Math.abs(transaccion.monto))}`,
+            20,
+            125
+        );
+
+        doc.text(
+            `Saldo despues de la operacion: $${formatoMonto(saldo)}`,
+            20,
+            140
+        );
+
+        const fechaHora = new Date(
+            transaccion.fechaISO || Date.now()
+        );
+
+        const hora = [
+            fechaHora.getHours(),
+            fechaHora.getMinutes(),
+            fechaHora.getSeconds()
+        ].map(valor => String(valor).padStart(2, "0")).join("-");
+
+        const identificador = Date.now();
+
+        doc.save(
+            `Comprobante_${transaccion.tipo}_${fecha}_${hora}_${identificador}.pdf`
+        );
+    }
+
+    // Carga inicial
+    mostrarTransacciones();
+
+});
+</script>
+
 </body>
 </html>
