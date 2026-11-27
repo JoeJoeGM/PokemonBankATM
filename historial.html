@@ -105,7 +105,6 @@ document.addEventListener("DOMContentLoaded", function () {
     // Obtener movimientos almacenados
     function obtenerTransacciones() {
         return JSON.parse(
-            localStorage.getItem("pokemonBankHistorial") ||
             localStorage.getItem("transaccionesATM") ||
             "[]"
         );
