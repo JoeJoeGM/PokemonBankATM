@@ -65,17 +65,30 @@ body {
 
 .contenedor-graficas {
     display: flex; /*Se alinean las graficas en fila*/
+    flex-wrap: wrap;
     gap: 20px;/*Espacio entre cada grafica*/
     justify-content: center; /*Centra horizontalmente las graficas*/
     align-items: center; /*Alinea verticalmente*/
 }
 canvas {
-    
-    max-width: 50%; /*Cada grafica ocupa como maximo la mitad del contenedor*/
+    flex: 1 1 280px;
+    min-width: 0;
+    max-width: calc(50% - 10px); /*Dos gráficas con espacio entre ellas*/
     width: 100%; /*Se ocupa todo el ancho disponible*/
     max-height: 100%;
     background: #ffffff;
     border: 1px solid #dddddd;
+}
+
+@media (max-width: 600px) {
+    .contenedor-graficas {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    canvas {
+        max-width: 100%;
+    }
 }
 
 
